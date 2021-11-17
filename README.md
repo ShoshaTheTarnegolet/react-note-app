@@ -5,6 +5,6 @@ You can finde here:
 1. work with modals;
 2. work with dates (adding update date after the note is edited);
 
-It isn't finished yet since I have some bonus things to do.
+In the near future I'll connect this app to firebase database to save notes and I will make it possible to add note as a reminder.
 
 For course I've deployed this app to [Netlify](https://react-note-app-fot-itc.netlify.app/), but now it can be found on [Firebase](https://shoshas-note-app.web.app/). For now this app is really very simple, I even haven't add a storage for notes, but it's in my plans.

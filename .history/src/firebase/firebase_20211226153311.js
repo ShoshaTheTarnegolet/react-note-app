@@ -27,4 +27,11 @@ const analytics = getAnalytics(app);
 const db = getDatabase(app);
 const storage = getStorage(app);
 
+/*firebase.initializeApp(firebaseConfig);
+ const db = firebase.firestore();
+const db = firebase.database();*/
+
+/* export {db}; */
+/* export default firebase; */
+
  export {app, analytics, db, storage};

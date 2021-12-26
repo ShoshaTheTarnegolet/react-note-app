@@ -4,6 +4,7 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 import Input from '@mui/material/Input';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+/* styling */
 const theme = createTheme({
   typography: {
     fontFamily: ['Ubuntu', 'sans-serif'],
@@ -15,7 +16,7 @@ const theme = createTheme({
     },
   },
 });
-
+/* note input:  */
 const NoteInput = (props) => {
   return (
     <ThemeProvider theme={theme}>

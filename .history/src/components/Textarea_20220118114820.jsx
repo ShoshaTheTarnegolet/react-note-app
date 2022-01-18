@@ -32,7 +32,7 @@ class Textarea extends React.Component {
     };
   }
 
-  /* updating note */
+/* updating note */
   updateTitle = (event) => {
     this.setState({ title: event.target.value });
   };
@@ -40,6 +40,7 @@ class Textarea extends React.Component {
   updateDetails = (event) => {
     this.setState({ details: event.target.value });
   };
+
 
   submitHandler = (e) => {
     e.preventDefault();
@@ -81,6 +82,7 @@ class Textarea extends React.Component {
   deleteHandler = (id, i) => {
     if (window.confirm('Are you sure you want to delete your note?')) {
       const items = this.state.notes.filter((item) => {
+        console.log(item.id, item.date);
         this.deleteNote(i);
         return item.id !== i;
       });

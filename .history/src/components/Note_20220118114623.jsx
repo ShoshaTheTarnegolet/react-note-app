@@ -1,7 +1,7 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
 import ButtonBlock from './ButtonBLock';
-import { db } from '../firebase/firebase';
+import { app, db } from '../firebase/firebase';
 import { ref, update } from 'firebase/database';
 /* material ui */
 import Input from '@mui/material/Input';
@@ -41,6 +41,7 @@ class Note extends React.Component {
   appendChild() {
     this.setState({
       newDate: new Date().toLocaleString(),
+
       children: [
         ...this.state.children,
         <Typography key={this.state.id} variant="caption">
@@ -89,6 +90,17 @@ class Note extends React.Component {
       id: this.state.editId,
       newDate: new Date().toLocaleString(),
     });
+    /*      push(ref(db, `${this.state.editId}`), {
+      newDate: new Date().toLocaleString(),
+     }) */
+    /*
+const postData = {}
+   const newPostKey = push(ref(db),`${this.state.editId}`).key;
+     const updates = {};
+  updates[`/${this.state.editId}/` + new Date().toLocaleString()] = postData;
+
+
+  return update(ref(db), postData) */
   };
 
   openModal = () => {
@@ -113,13 +125,13 @@ class Note extends React.Component {
     const editing = this.state.editing;
     const editKey = this.state.editKey;
     const editId = this.state.editId;
+    const newDate = this.state.newDate;
 
     return (
       <>
         <Card sx={{ boxShadow: 3 }} className="entry" id={editId} key={editKey}>
           <CardActionArea onClick={this.openModal}>
             <CardContent>
-              {/* typograpfy: header, note text, date */}
               <Typography gutterBottom variant="h4" component="div">
                 {editedTitle}
               </Typography>
@@ -154,6 +166,7 @@ class Note extends React.Component {
                     <Typography id="details" className="details" variant="body1">
                       {editedDetails}
                     </Typography>
+
                     <Typography id="date" display="block" variant="caption">
                       {this.state.children.map((child) => child)}{' '}
                     </Typography>

@@ -81,6 +81,7 @@ class Textarea extends React.Component {
   deleteHandler = (id, i) => {
     if (window.confirm('Are you sure you want to delete your note?')) {
       const items = this.state.notes.filter((item) => {
+        console.log(item.id, item.date);
         this.deleteNote(i);
         return item.id !== i;
       });

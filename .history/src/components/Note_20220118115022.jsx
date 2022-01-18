@@ -112,7 +112,7 @@ class Note extends React.Component {
     const editedDate = this.state.editedDate;
     const editing = this.state.editing;
     const editKey = this.state.editKey;
-    const editId = this.state.editId;
+    const editId = this.state.editId;;
 
     return (
       <>

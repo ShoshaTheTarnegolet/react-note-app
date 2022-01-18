@@ -41,6 +41,7 @@ class Note extends React.Component {
   appendChild() {
     this.setState({
       newDate: new Date().toLocaleString(),
+
       children: [
         ...this.state.children,
         <Typography key={this.state.id} variant="caption">
@@ -112,7 +113,7 @@ class Note extends React.Component {
     const editedDate = this.state.editedDate;
     const editing = this.state.editing;
     const editKey = this.state.editKey;
-    const editId = this.state.editId;
+    const editId = this.state.editId;;
 
     return (
       <>

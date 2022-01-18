@@ -32,7 +32,6 @@ class Textarea extends React.Component {
     };
   }
 
-  /* updating note */
   updateTitle = (event) => {
     this.setState({ title: event.target.value });
   };
@@ -46,10 +45,32 @@ class Textarea extends React.Component {
     if (!this.state.details.length) {
       return;
     }
+    console.log(this.state.key);
+    /*   const newNote = {
+      newTitle: this.state.title,
+      newDetails: this.state.details,
+      date: new Date().toDateString(),
+    };
+    this.setState((prevState) => ({
+      notes: prevState.notes.concat(newNote),
+      title: '',
+      details: '',
+    })); */
     this.addNoteToDB();
+    /*
+    storageRef.put({
+      newTitle: this.state.title,
+      newDetails: this.state.details,
+      date: new Date().toDateString(),
+      id: nanoid(3),
+      key: nanoid(3),
+    }) */
   };
 
   addNoteToDB = () => {
+    const note_id = `note-${this.state.date}`;
+    const time = new Date().toLocaleTimeString();
+    /* set(ref(db, `${note_id}-${time.replace(/:\d+ /, ' ')}`), { */
     set(ref(db, `${this.state.id}`), {
       title: this.state.title,
       details: this.state.details,
@@ -57,10 +78,7 @@ class Textarea extends React.Component {
       id: this.state.id,
       key: nanoid(3),
     });
-    this.setState({
-      details: '',
-      title: '',
-    });
+    
   };
 
   componentDidMount() {
@@ -68,9 +86,12 @@ class Textarea extends React.Component {
     onValue(noteRef, (snapshot) => {
       const data = snapshot.val();
       let allNotes = [];
+      console.log(snapshot.val());
       if (snapshot.exists()) {
         for (let key in data) {
+          console.log('data[key]', data[key].date, Object.entries(data[key]));
           allNotes.push(data[key]);
+          console.log(allNotes);
         }
       }
       this.setState({ notes: allNotes });
@@ -79,12 +100,18 @@ class Textarea extends React.Component {
 
   /* delete note function */
   deleteHandler = (id, i) => {
+    let noteRef = ref(db);
+
     if (window.confirm('Are you sure you want to delete your note?')) {
       const items = this.state.notes.filter((item) => {
+        console.log(item.id, item.date);
         this.deleteNote(i);
+
         return item.id !== i;
       });
+
       this.setState({ notes: items });
+
       this.handleClose();
     } else {
       this.handleClose();

@@ -41,6 +41,7 @@ class Note extends React.Component {
   appendChild() {
     this.setState({
       newDate: new Date().toLocaleString(),
+
       children: [
         ...this.state.children,
         <Typography key={this.state.id} variant="caption">
@@ -89,6 +90,17 @@ class Note extends React.Component {
       id: this.state.editId,
       newDate: new Date().toLocaleString(),
     });
+    /*      push(ref(db, `${this.state.editId}`), {
+      newDate: new Date().toLocaleString(),
+     }) */
+    /*
+const postData = {}
+   const newPostKey = push(ref(db),`${this.state.editId}`).key;
+     const updates = {};
+  updates[`/${this.state.editId}/` + new Date().toLocaleString()] = postData;
+
+
+  return update(ref(db), postData) */
   };
 
   openModal = () => {
@@ -113,6 +125,7 @@ class Note extends React.Component {
     const editing = this.state.editing;
     const editKey = this.state.editKey;
     const editId = this.state.editId;
+    const newDate = this.state.newDate;
 
     return (
       <>
@@ -154,6 +167,7 @@ class Note extends React.Component {
                     <Typography id="details" className="details" variant="body1">
                       {editedDetails}
                     </Typography>
+
                     <Typography id="date" display="block" variant="caption">
                       {this.state.children.map((child) => child)}{' '}
                     </Typography>

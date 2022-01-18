@@ -32,7 +32,6 @@ class Textarea extends React.Component {
     };
   }
 
-  /* updating note */
   updateTitle = (event) => {
     this.setState({ title: event.target.value });
   };
@@ -50,6 +49,8 @@ class Textarea extends React.Component {
   };
 
   addNoteToDB = () => {
+    const note_id = `note-${this.state.date}`;
+    const time = new Date().toLocaleTimeString();
     set(ref(db, `${this.state.id}`), {
       title: this.state.title,
       details: this.state.details,
@@ -58,9 +59,9 @@ class Textarea extends React.Component {
       key: nanoid(3),
     });
     this.setState({
-      details: '',
+      details:'',
       title: '',
-    });
+    })
   };
 
   componentDidMount() {
@@ -70,6 +71,7 @@ class Textarea extends React.Component {
       let allNotes = [];
       if (snapshot.exists()) {
         for (let key in data) {
+          console.log('data[key]', data[key].date, Object.entries(data[key]));
           allNotes.push(data[key]);
         }
       }
@@ -81,10 +83,13 @@ class Textarea extends React.Component {
   deleteHandler = (id, i) => {
     if (window.confirm('Are you sure you want to delete your note?')) {
       const items = this.state.notes.filter((item) => {
+        console.log(item.id, item.date);
         this.deleteNote(i);
         return item.id !== i;
       });
+
       this.setState({ notes: items });
+
       this.handleClose();
     } else {
       this.handleClose();
